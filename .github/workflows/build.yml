@@ -44,5 +44,6 @@ jobs:
 
       - name: Ecs-compose init and up
         run: |
+          source ~/venv/bin/activate
           ecs-compose-x init
           ecs-compose-x up -f docker-compose.yaml -f aws-compose-x.yaml -n frontend-app
