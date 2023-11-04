@@ -1,0 +1,27 @@
+# Base NGINX with small page example
+
+version: "3.8"
+
+services:
+  frontend:
+    image: nginx:latest
+    ports:
+      - protocol: tcp
+        target: 80
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    healthcheck:
+      test: curl --fail http://localhost || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 20s
+      timeout: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256MB
+        reservations:
+          cpus: "0.1"
+          memory: 128MB

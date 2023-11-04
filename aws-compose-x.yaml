@@ -1,0 +1,30 @@
+
+networks:
+  public:
+    x-vpc: PublicSubnets # this is created by DisableNat
+
+services:
+  frontend:
+    networks:
+      public:
+    x-network:
+      AssignPublicIp: true
+      Ingress:
+        ExtSources:
+          - IPv4: 0.0.0.0/0
+            Name: all
+
+x-vpc:
+  Properties:
+    VpcCidr: 192.168.0.0/24 # A simple CIDR with plenty of room for the deployment.
+    DisableNat: True        # Although the Public, App and Storage subnets are created, no NAT nor route is created.
+    Endpoints: {} # Set to {} to disable creating the default VPC endpoints Compose-X use. We won't be needing them.
+
+x-cluster:
+  Properties:
+    CapacityProviders:
+      - FARGATE_SPOT
+    ClusterName: ecs-clusterx
+    DefaultCapacityProviderStrategy:
+      - CapacityProvider: FARGATE_SPOT
+        Weight: 1

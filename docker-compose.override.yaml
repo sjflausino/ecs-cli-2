@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  frontend:
+    ports:
+      - protocol: tcp
+        published: 8000
+        target: 80
