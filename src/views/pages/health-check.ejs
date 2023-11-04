@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="jumbotron">
+    <div class="container-fluid mt-2 mb-2 d-flex justify-content-center align-items-center">
+        <img src="/assets/pc.png" alt="" width="350"  class="mr-5 mb-3"/>
+        <table class="table table-light">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col border">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                    <b class="mr-2">Uptime:</b> <%= process.uptime() %>
+                </td>
+              </tr>
+              <tr>
+                <td class="d-flex">
+                    <b class="mr-2">Status:</b> Ok <span class="material-symbols-outlined text-success"> check_box </span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <b class="mr-2">Timestamp:</b> <%= Date.now() %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <a class="btn btn-primary" href="/" role="button">Back to Home</a>
+  </div>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

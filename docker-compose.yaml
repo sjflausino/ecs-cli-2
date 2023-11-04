@@ -1,18 +1,12 @@
-# Base NGINX with small page example
-
 version: "3.8"
-
 services:
   frontend:
-    image: nginx:latest
+    image: veecode/ecs-image:latest
     ports:
       - protocol: tcp
-        target: 80
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
+        target: 5000
     healthcheck:
-      test: curl --fail http://localhost || exit 1
+      test: curl --fail http://localhost:5000 || exit 1
       interval: 60s
       retries: 5
       start_period: 20s
