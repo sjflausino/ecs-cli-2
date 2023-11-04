@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/cache@v3
       - name: Checkout code
         uses: actions/checkout@v3
 
