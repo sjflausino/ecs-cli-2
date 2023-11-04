@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/cache@v3
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -37,10 +36,6 @@ jobs:
             source ~/venv/bin/activate
             pip install pip -U
             pip install ecs-composex
-
-      - name: pip -V
-        run: |
-          pip -V
 
       - name: Ecs-compose init and up
         run: |
