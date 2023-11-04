@@ -1,5 +1,4 @@
-name: Build and Push Docker Image
-
+name: deploy ECS with compose
 on:
   workflow_dispatch:
 
@@ -38,10 +37,7 @@ jobs:
             pip install pip -U
             pip install ecs-composex
 
-      - name: Ecs-compose init
+      - name: Ecs-compose init and up
         run: |
           ecs-compose-x init
-
-      - name: Ecs-compose install
-        run: |
           ecs-compose-x up -f docker-compose.yaml -f aws-compose-x.yaml -n frontend-app
