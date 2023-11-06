@@ -44,7 +44,7 @@ jobs:
           ecs-compose-x up -f docker-compose.yaml -f aws-compose-x.yaml -n frontend-app
 
   restore_ip:
-    # needs: build
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -63,9 +63,10 @@ jobs:
           comando=$(./list-services.sh)
           while [[ $counter -lt $timeout ]]; do
               if [ -n "$comando" ]; then
-                  echo "$(./list-ips.sh)"
+                  echo "IP=$(./list-ips.sh)"
                   break
               else
+                  echo "Checking the IP of the application application..."
                   sleep 60
                   counter=$((counter+1))
                   comando=$(./list-services.sh)
