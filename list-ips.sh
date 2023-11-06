@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CLUSTER_NAME="health-check-cluster-ecs"
+CLUSTER_NAME="ecs-clusterx"
 SERVICE_NAME=$(./list-services.sh)
 
 aws ecs list-tasks --cluster $CLUSTER_NAME --service-name $SERVICE_NAME \

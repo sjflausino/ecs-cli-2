@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CLUSTER_NAME="health-check-cluster-ecs"
+CLUSTER_NAME="ecs-clusterx"
 TASK_DEFINITION="frontend"
 
 # List all services in the cluster

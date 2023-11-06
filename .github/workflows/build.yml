@@ -43,18 +43,21 @@ jobs:
           ecs-compose-x init
           ecs-compose-x up -f docker-compose.yaml -f aws-compose-x.yaml -n frontend-app
 
+  restore_ip:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Restore IP from app
         run: |
-            export TASK_ID=$(aws ecs list-tasks --cluster ecs-clusterx | jq -r '.taskArns[0]' | awk -F'/' '{print $NF}')
-            timeout=10
-            comando=$(aws ecs describe-tasks --tasks $TASK_ID --cluster ecs-clusterx --query 'tasks[0].containers[0].lastStatus')
-            while [[ $counter -lt $timeout ]]; do
-                if $comando | grep -q "RUNNING"; then
-                    echo "$(./list-ips.sh)"
-                    break
-                else
-                    sleep 10
-                    counter=$((counter+1))
-                fi
-            done
-            
+          timeout=10
+          comando=$(./list-services.sh)
+          while [[ $counter -lt $timeout ]]; do
+              if [ -n "$comando" ]; then
+                  echo "$(./list-ips.sh)"
+                  break
+              else
+                  sleep 60
+                  counter=$((counter+1))
+                  comando=$(./list-services.sh)
+              fi
+          done
